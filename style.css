@@ -1,0 +1,100 @@
+body {
+    font-family: 'Oxanium', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Allow footer to stick at the bottom */
+    height: 100vh;
+    background-color: #000;
+    color: white;
+}
+
+/* Header styling */
+header {
+    position: fixed; /* Changed to fixed to keep header always visible */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+/* Logo styling */
+.logo {
+    font-size: 2rem; /* Adjusted size */
+}
+
+/* Menu button */
+.menu-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+/* Dropdown styling */
+.dropdown {
+    display: none; /* Keep it hidden by default */
+    position: absolute; /* Position it directly below the menu button */
+    top: 100%; /* Position it directly below the menu button */
+    right: 0; /* Align to the right */
+    background-color: #333;
+    border-radius: 7px;
+    z-index: 1000; /* Ensure dropdown is on top */
+}
+
+/* Dropdown links */
+.dropdown a {
+    display: block;
+    color: #fff;
+    padding: 10px 14px; /* Match the padding of the menu button */
+    text-decoration: none;
+}
+
+.dropdown a:hover {
+    background-color: #555; /* Hover effect for dropdown items */
+}
+
+/* Centered search bar */
+main {
+    flex-grow: 1; /* Allow main content to grow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 10px;
+    font-size: 1rem;
+    width: 300px;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+
+/* Footer styling */
+footer {
+    background-color: #333; /* Make footer background consistent */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+.checkout-button {
+    background-color: #59b280;
+    color: #fff;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+    background-color: #458b63;
+}

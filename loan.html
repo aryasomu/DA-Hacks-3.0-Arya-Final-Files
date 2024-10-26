@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Amortization Calculator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Oxanium', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #545454;
+        }
+
+        header {
+            width: 100%;
+            padding: 1rem;
+            background-color: #545454;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #59b280;
+        }
+
+        .menu {
+            position: relative;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #545454;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 0.5rem;
+        }
+
+        .dropdown a {
+            display: block;
+            color: #59b280;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .dropdown a:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        main {
+            display: flex;
+            width: 80%;
+            margin: 1rem auto;
+            color: #545454;
+        }
+
+        #loan-form-section {
+            flex: 1;
+            margin-right: 2rem;
+            margin-left: -1rem;
+        }
+
+        #loan-form label {
+            color: #545454;
+        }
+
+        #loan-form input, #loan-form button {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+
+        #loan-form button {
+            background-color: #59b280;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #loan-form button:hover {
+            background-color: #458b63;
+        }
+
+        #output {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 80vh;
+            border-left: 2px solid #ddd;
+            padding: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #545454;
+            color: #fff;
+        }
+
+        h2, h3 {
+            color: #545454;
+        }
+
+        footer {
+            margin-top: 2rem;
+            color: #545454;
+        }
+
+        footer a {
+            color: #59b280;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">ExoLand</div>
+    <div class="menu">
+        <button class="menu-btn" onclick="toggleDropdown()">Menu</button>
+        <div class="dropdown" id="dropdown">
+            <a href="index.html">Home</a>
+            <a href="model.html">Model</a>
+            <a href="loan.html">Loan</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="loan-form-section">
+        <h1>Loan Amortization Calculator</h1>
+        <form id="loan-form">
+            <label for="principal">Principal:</label>
+            <input type="number" id="principal" required><br>
+
+            <label for="interest">Interest Rate (%):</label>
+            <input type="number" id="interest" step="0.01" required><br>
+
+            <label for="years">Years:</label>
+            <input type="number" id="years" required><br>
+
+            <button type="submit">Calculate</button>
+        </form>
+    </section>
+
+    <section id="output" class="output"></section>
+</main>
+
+<footer>
+    © 2024 ExoLand, Inc. | <a href="#terms">Terms</a> | <a href="#privacy">Privacy</a> | <a href="#support">Support</a>
+</footer>
+
+<script>
+    // Toggle the dropdown menu
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdown');
+        const menuButton = document.querySelector('.menu-btn');
+        if (!menuButton.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    document.getElementById('loan-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const principal = parseFloat(document.getElementById('principal').value);
+        const interest = parseFloat(document.getElementById('interest').value) / 100 / 12;
+        const years = parseFloat(document.getElementById('years').value);
+        const payments = years * 12;
+
+        const x = Math.pow(1 + interest, payments);
+        const monthly = (principal * x * interest) / (x - 1);
+
+        if (isFinite(monthly)) {
+            let outputHtml = `<h2>Monthly Payment: $${monthly.toFixed(2)}</h2>`;
+            outputHtml += `<h3>Amortization Schedule:</h3><table><tr><th>Month</th><th>Interest</th><th>Principal</th><th>Balance</th></tr>`;
+
+            let balance = principal;
+
+            for (let month = 1; month <= payments; month++) {
+                const interestPayment = balance * interest;
+                const principalPayment = monthly - interestPayment;
+                balance -= principalPayment;
+
+                outputHtml += `<tr>
+                    <td>${month}</td>
+                    <td>$${interestPayment.toFixed(2)}</td>
+                    <td>$${principalPayment.toFixed(2)}</td>
+                    <td>$${balance.toFixed(2)}</td>
+                </tr>`;
+            }
+
+            outputHtml += `</table>`;
+            document.getElementById('output').innerHTML = outputHtml;
+        } else {
+            document.getElementById('output').innerHTML = `<h2>Please check your numbers</h2>`;
+        }
+    });
+</script>
+</body>
+</html>

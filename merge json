@@ -1,0 +1,31 @@
+{
+  "name": "da-hacks",
+  "version": "1.0.0",
+  "description": "3D solar system visualization using Three.js",
+  "main": "../../Library/Application Support/JetBrains/WebStorm2024.2/scratches/main.js",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "three.js",
+    "vite",
+    "solar system",
+    "3D visualization"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tweenjs/tween.js": "^25.0.0",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  },
+  "directories": {
+    "test": "test"
+  }
+}

@@ -3,161 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExoLand - Home</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&display=swap">
+    <title>3D Solar System Visualization</title>
     <style>
         body {
-            font-family: 'Oxanium', sans-serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #545454;
-            background-color: #ffffff;
-            height: 100vh;
             overflow: hidden;
         }
-
-        header {
-            width: 100%;
-            padding: 1rem;
-            background-color: #545454;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #59b280;
-        }
-
-        .menu {
-            position: relative;
-        }
-
-        .menu-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .dropdown {/* Hidden by default */
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: #545454;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 0.5rem;
-        }
-
-        .dropdown a {
+        canvas {
             display: block;
-            color: #59b280;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-
-        .dropdown a:hover {
-            background-color: #333;
-            color: #fff;
-        }
-
-        .content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #545454;
-        }
-
-        .content h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-
-        .content .main-button {
-            background-color: #59b280;
-            color: #fff;
-            padding: 1rem 2rem;
-            font-size: 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .content .main-button:hover {
-            background-color: #458b63;
-        }
-
-        footer {
-            padding: 1rem;
-            color: #545454;
-        }
-
-        footer a {
-            color: #59b280;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
+            width: 100vw;
+            height: 100vh;
         }
     </style>
 </head>
 <body>
-<header>
-    <div class="logo">
-        <img src="/src/website/image-removebg-preview%20(3).png" style="height: 60px;">
-    </div>
-    <div class="menu">
-        <button class="menu-btn" onclick="toggleDropdown()">Menu</button>
-        <div class="dropdown" id="dropdown">
-            <a href="index.html">Home</a>
-            <a href="model.html">Model</a>
-            <a href="loan.html">Loan</a>
-        </div>
-    </div>
-</header>
-
-<main class="content">
-    <h1>Welcome to ExoLand</h1>
-    <p>Your journey to discovering the universe begins here. Explore our models and immerse yourself in the possibilities beyond Earth.</p>
-    <a href="model.html" class="main-button">Explore the Model</a>
-</main>
-
-<footer>
-    © 2024 ExoLand, Inc. | <a href="#terms">Terms</a> | <a href="#privacy">Privacy</a> | <a href="#support">Support</a>
-</footer>
-
-<script>
-    function toggleDropdown() {
-        const dropdown = document.getElementById('dropdown');
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    }
-
-    document.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('dropdown');
-        const menuButton = document.querySelector('.menu-btn');
-        if (!menuButton.contains(event.target) && !dropdown.contains(event.target)) {
-            dropdown.style.display = 'none';
-        }
-    });
-</script>
+<!-- Three.js Scene will render here -->
+<script type="module" src="main.js"></script>
 </body>
 </html>
+
